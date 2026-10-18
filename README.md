@@ -1,484 +1,131 @@
 # Healthcare Practice Operations Tracking & Reporting System
 
-A Google Sheets-based operational tracking and reporting system designed to support a growing multi-location medical practice.
+A Google Sheets-based prototype for organising healthcare operations and turning operational records into management insights.
 
-> **Portfolio project:** This project is built entirely with simulated/synthetic data and is inspired by real-world healthcare operations reporting requirements. It is not work commissioned by or completed for the original organization/client.
+**Tools:** Google Sheets · Spreadsheet Automation · Data Validation · Operational Analytics · Dashboard Reporting
 
----
+> **Portfolio project:** This is an independent prototype built with synthetic data and inspired by real-world healthcare operations. It was not commissioned by or implemented at any clinic.
 
-## Project Overview
+## Dashboard Preview
 
-Healthcare practices generate large amounts of operational data across patient visits, clinical orders, scheduling activity, providers, locations, and financial operations.
+![Healthcare Practice Operations Dashboard](images/dashboard.png)
 
-When these activities are tracked through disconnected spreadsheets or manually maintained reports, organizations can experience:
+*Dashboard screenshot to be added.*
 
-* Duplicate data entry
-* Inconsistent terminology and data formats
-* Difficulty tracking outstanding work
-* Manual KPI calculations
-* Limited visibility into operational bottlenecks
-* Time-consuming monthly reporting
-* Difficulty comparing providers and locations
-* Inconsistent management reporting
+## 1. Project Overview
 
-This project explores how a standardized **Google Sheets operational reporting system** can address these challenges.
+Small healthcare practices manage several connected workflows, from patient registration and appointment scheduling to inventory and financial transactions. When these activities are recorded inconsistently across separate spreadsheets, maintaining reliable records and producing management reports can become time-consuming.
 
-The goal is not simply to create visually appealing spreadsheets. The goal is to design a logical, standardized, scalable system that connects operational data to management reporting.
+This project explores how a structured Google Sheets workbook can connect these operational workflows and automate routine calculations and reporting.
 
----
+The prototype is designed around a simulated fertility practice operating across Abuja, Nigeria, and the United Kingdom.
 
-## Business Problem
+**The objective:** demonstrate practical data modelling, spreadsheet automation, data quality control, and management reporting in a healthcare context.
 
-The simulated healthcare organization is a growing multi-location medical practice that needs a centralized approach to tracking and reporting operational performance.
+## 2. Key Features
 
-The system is designed to support areas including:
+- **Patient and provider management:** Structured records, unique identifiers, standardised fields, and linked information.
+- **Enquiry tracking:** Monitor enquiry sources, statuses, contact attempts, outcomes, and follow-up dates.
+- **Scheduling and appointments:** Track provider availability, bookings, appointment details, and outcomes.
+- **Inventory management:** Record stock purchases, usage, adjustments, calculate current stock, and flag replenishment needs.
+- **Financial tracking:** Record revenue and expenses by category and location, with optional patient and appointment references.
+- **Management dashboard:** KPI scorecards, appointment status, revenue by service, revenue by location, enquiries by source, and inventory alerts.
 
-* Clinical order tracking
-* Patient visits
-* Scheduling and call activity
-* Provider and location performance
-* Revenue and expenses
-* Operational KPIs
-* Goals and variance analysis
-* Outstanding work and exceptions
-* Management reporting
+## 3. Workbook Architecture
 
-The intended workflow is:
+The workbook contains 14 tabs organised into four functional layers.
 
-```
-Operational Data
-       ↓
-Standardized Data Collection
-       ↓
-Validation & Transformation
-       ↓
-Calculated Metrics
-       ↓
-KPI Reporting
-       ↓
-Management Insights
-```
+| Layer | Tabs | Purpose |
+|---|---|---|
+| Foundation | Patients, Partners, Next of Kin, Providers, Reference Lists | Maintain core records and standardised reference values. |
+| Patient Acquisition & Service Delivery | Enquiries, Enquiry Follow-up, Scheduling, Appointments, Appointment Follow-up | Track prospective patients, follow-ups, availability, and bookings. |
+| Operational Resources & Finance | Medical Supplies, Inventory Transactions, Financial Transactions | Monitor stock movements, revenue, and expenses. |
+| Management Insight | Management Reporting | Present summary metrics, charts, and inventory alerts. |
 
----
+The design uses unique identifiers and references to connect related records instead of repeatedly entering the same information.
 
-## Project Objectives
+For example, appointment records reference patient and provider identifiers, while inventory balances are calculated from recorded stock movements.
 
-The project aims to demonstrate the ability to:
+## 4. Technical Implementation
 
-1. Translate a real-world business requirement into a data structure.
-2. Identify entities, relationships, and data dependencies.
-3. Design a standardized operational tracking system.
-4. Establish consistent reference/master data.
-5. Reduce duplicate data entry.
-6. Automate recurring calculations and reporting.
-7. Track operational KPIs and exceptions.
-8. Support provider and location-level analysis.
-9. Build scalable reporting workflows using Google Sheets.
-10. Document the system clearly enough for another analyst or stakeholder to understand and reproduce.
+The prototype demonstrates the following Google Sheets techniques:
 
----
+- `ARRAYFORMULA` for automated identifiers and calculated columns.
+- `XLOOKUP` for retrieving information from related records.
+- `IF` for conditional calculations and status classification.
+- `COUNTIF` and `SUMIF` for summary metrics.
+- `SUMIFS` for multi-criteria financial reporting.
+- `FILTER` for dynamically displaying inventory alerts.
+- Data validation and dropdowns for standardised inputs.
+- Conditional formatting and charts for visual reporting.
 
-## Core Business Areas
+These techniques support consistent data entry, automated calculations, and reporting that updates as the underlying records change.
 
-### 1. Clinical Order Operations
+## 5. Dashboard & Reporting
 
-Track clinical orders generated by providers, including:
+The management reporting layer is designed to answer practical operational questions:
 
-* Surgical orders
-* MRI/CT/X-ray
-* Laboratory
-* Pathology
-* Referrals
-* Custom orthotics
-* Bracing/DME
-* Other clinical orders
+| Dashboard component | Business question |
+|---|---|
+| Patient and enquiry scorecards | How many patients and enquiries have been recorded? |
+| Appointment scorecard and status chart | How many appointments are recorded, and what are their outcomes? |
+| Revenue by service | Which service categories generate recorded revenue? |
+| Revenue by location | How is recorded revenue distributed across locations? |
+| Enquiries by source | Which channels are generating enquiries? |
+| Inventory alerts | Which supplies need replenishment or attention? |
 
-Potential operational metrics include:
+### Financial reporting consideration
 
-* Total orders
-* Completed orders
-* Outstanding orders
-* Overdue orders
-* Completion rate
-* Turnaround time
-* Orders by provider
-* Orders by location
-* Orders by order type
+Because Abuja transactions may be denominated in Nigerian naira (NGN) and UK transactions in pounds sterling (GBP), their amounts must not be combined into a single comparable monetary total without an appropriate currency-conversion method.
 
----
+Currency-aware reporting is an identified refinement for the prototype.
 
-### 2. Patient & Visit Operations
+## 6. Design Decisions & Lessons Learned
 
-Track patient visit activity across providers and locations.
+**Separating scheduling from appointments**
 
-Potential metrics include:
+Provider availability and actual bookings represent different operational concepts. Keeping them separate makes the records easier to maintain and supports more meaningful reporting.
 
-* Total visits
-* New patient visits
-* Returning patient visits
-* Provider volume
-* Location volume
-* Visits by period
-* Revenue per visit
-
----
-
-### 3. Scheduling & Call Operations
-
-Track scheduling-related call activity.
-
-Potential metrics include:
-
-* Total calls
-* Calls answered
-* Calls abandoned
-* Answer rate
-* Abandonment rate
-* Average answer time
-* Scheduling conversion
-
----
-
-### 4. Financial Operations
-
-Track simulated revenue and expense activity.
-
-Revenue analysis may include:
-
-* Actual revenue
-* Projected revenue
-* Revenue by provider
-* Revenue by location
-* Revenue per visit
-
-Expense analysis may include:
-
-* Payroll/staffing
-* Provider expenses
-* Rent
-* Utilities
-* Inventory/supplies
-* Equipment
-* Marketing
-* Acquisition costs
-* Administrative/shared overhead
-
-Potential derived metrics include:
-
-* Expense per visit
-* Staffing cost per visit
-* Marketing cost per new patient
-* Contribution
-* Contribution margin
-* Provider productivity
-* Location profitability
-
----
-
-### 5. Executive & Management Reporting
-
-The reporting layer is designed to allow performance analysis by:
-
-* Organization
-* Location
-* Provider
-* Department
-* Month
-* Quarter
-* Year
+**Maintaining separate follow-up logs**
 
-Management reporting may include:
+An enquiry or appointment may involve multiple contact attempts. Separate follow-up records preserve that history rather than overwriting earlier activity.
 
-* Current performance
-* Historical trends
-* Goal vs actual
-* Variance
-* Operational exceptions
-* Location comparisons
-* Provider comparisons
-* Capacity/utilization indicators
+**Calculating inventory from transactions**
 
----
+The system derives current stock from recorded purchases, usage, and adjustments. This provides a more traceable approach than manually overwriting stock balances.
 
-## Data Architecture
+**Investigating data quality issues**
 
-The project will be designed around three broad layers:
+During dashboard development, a revenue calculation returned zero even though the displayed transaction type appeared correct. Further testing identified a hidden trailing space that prevented an exact text match.
 
-```
-┌──────────────────────────────┐
-│       Reference Data         │
-│                              │
-│ Locations                    │
-│ Providers                    │
-│ Employees/Teams              │
-│ Departments                  │
-│ Order Types                  │
-│ Statuses                     │
-│ Expense Categories           │
-│ KPI Targets                  │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│     Operational Data         │
-│                              │
-│ Visits                       │
-│ Orders                       │
-│ Scheduling Calls             │
-│ Financial Transactions       │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│      Calculations & KPIs     │
-│                              │
-│ Turnaround Time              │
-│ Days Outstanding             │
-│ Completion Rate              │
-│ Revenue per Visit            │
-│ Expense per Visit            │
-│ Variance                     │
-│ Utilization                  │
-└──────────────┬───────────────┘
-               │
-               ▼
-┌──────────────────────────────┐
-│       Reporting Layer        │
-│                              │
-│ Operational Reporting        │
-│ KPI Summaries                │
-│ Exception Reporting          │
-│ Management Reporting         │
-└──────────────────────────────┘
-```
+This reinforced an important lesson: a formula can be syntactically correct while inconsistent source values still produce incorrect results.
 
-The final architecture will be determined during the project rather than assuming that every business entity requires a separate spreadsheet.
+**Designing for analytical accuracy**
 
----
+The revenue-by-location chart highlighted the need to account for different currencies. A visualisation rendering successfully does not automatically make the comparison meaningful.
 
-## Design Principles
+## 7. Data Privacy & Limitations
 
-The system will be developed around the following principles:
+All records used in this portfolio project are synthetic. No real patient data is included.
 
-### Single source of truth
+This is a working prototype for demonstrating spreadsheet-based operational tracking and reporting. It is not a production-ready clinical information system, electronic health record, or validated financial reporting platform.
 
-Where practical, information should be maintained once and referenced elsewhere rather than repeatedly re-entered.
+Before any real-world deployment, the system would require appropriate assessment of data protection, access controls, auditability, backup procedures, workflow requirements, and financial reporting rules.
 
-### Standardization
+## 8. Future Improvements
 
-Important fields such as locations, providers, order types, statuses, and expense categories should use controlled values.
+Potential extensions include:
 
-### Clear data grain
+- Currency-aware financial reporting and conversion rules.
+- Monthly operational trends and more advanced KPI analysis.
+- Enquiry conversion and appointment no-show analysis.
+- Improved data dictionary and system documentation.
+- Automated data collection and workflow enhancements using Google Forms or Apps Script.
 
-Each transactional dataset should have a clearly defined meaning for one row.
+These are proposed improvements, not features claimed as completed.
 
-For example:
+## About This Project
 
-> One row in the Order Tracker = one clinical order.
+This project forms part of my Healthcare BI and Data Analytics portfolio. It focuses on building the operational data structure behind useful reporting, rather than creating visualisations in isolation.
 
-### Separation of inputs and calculations
-
-Users should enter operational facts while the system calculates metrics that can be derived reliably.
-
-### Scalability
-
-The structure should continue to work as the number of providers, locations, patients, orders, and transactions increases.
-
-### Reproducibility
-
-Another analyst should be able to understand how the system works and reproduce the reporting process.
-
-### Operational usefulness
-
-The system should help users manage actual workflows, not simply produce attractive reports.
-
----
-
-## Tools & Skills
-
-### Primary Tool
-
-* Google Sheets
-
-### Google Sheets Skills Practiced
-
-* Data validation
-* Advanced formulas
-* `QUERY`
-* `FILTER`
-* `ARRAYFORMULA`
-* `XLOOKUP`
-* `INDEX/MATCH`
-* Pivot tables
-* Conditional formatting
-* Named ranges
-* Data standardization
-* Automated calculations
-* KPI reporting
-
-### Potential Later Extensions
-
-These will be introduced progressively rather than all at once:
-
-* Google Apps Script
-* Google Forms
-* Workflow automation
-* Additional data collection mechanisms
-
----
-
-## Project Methodology
-
-The project will be developed progressively.
-
-### Phase 1 — Business Requirements
-
-Identify:
-
-* Business processes
-* Entities
-* Data fields
-* Relationships
-* Inputs
-* Calculated fields
-* KPIs
-* Reporting requirements
-* Standardization requirements
-* Automation opportunities
-
-### Phase 2 — Data Architecture
-
-Define:
-
-* Master/reference data
-* Transactional data
-* Relationships
-* Data grain
-* Unique identifiers
-* Data dependencies
-* Reporting dimensions
-
-### Phase 3 — Google Sheets Architecture
-
-Design the workbook structure and determine:
-
-* Which datasets require separate sheets
-* Which information belongs in reference tables
-* How sheets will connect
-* Where calculations should occur
-* How reporting data will be generated
-
-### Phase 4 — Data Collection & Standardization
-
-Create synthetic data and implement:
-
-* Data validation
-* Controlled values
-* Standardized identifiers
-* Data-cleaning rules
-* Consistent formats
-
-### Phase 5 — Operational Tracking
-
-Build the operational tracking components for:
-
-* Clinical orders
-* Patient visits
-* Scheduling/calls
-* Financial transactions
-
-### Phase 6 — Automated Calculations
-
-Implement calculations for operational metrics such as:
-
-* Days outstanding
-* Turnaround time
-* Completion rates
-* Revenue per visit
-* Expense per visit
-* Variance
-* Other approved KPIs
-
-### Phase 7 — KPI Reporting
-
-Develop standardized reporting for:
-
-* Operations
-* Providers
-* Locations
-* Scheduling
-* Financial performance
-
-### Phase 8 — Management Reporting
-
-Create a Google Sheets-based management reporting layer focused on:
-
-* Trends
-* Goals
-* Variance
-* Exceptions
-* Provider performance
-* Location performance
-* Capacity/utilization
-
-### Phase 9 — Documentation
-
-Document:
-
-* System architecture
-* Data dictionary
-* Business rules
-* KPI definitions
-* Workflow
-* Assumptions
-* Limitations
-* Key findings
-* Future improvements
-
----
-
-## Data Privacy & Ethics
-
-This project does **not** contain real patient information.
-
-All patient identifiers, provider information, operational records, financial figures, and other healthcare data used in the project are simulated for educational and portfolio purposes.
-
-No real PHI or personally identifiable patient information is used.
-
----
-
-## Project Status
-
-**Status:** In Development
-
-Current stage:
-
-> **Business requirements & data architecture**
-
-The system will be built progressively, with each architectural decision documented before implementation.
-
----
-
-## Portfolio Context
-
-This project is part of a broader Healthcare BI/Data Analyst portfolio.
-
-Unlike the first two projects, Project 3 focuses primarily on **building the operational reporting system itself**, rather than creating a Power BI dashboard.
-
----
-
-## Disclaimer
-
-This is an independent portfolio project inspired by publicly available/relevant real-world healthcare operations requirements.
-
-It was **not commissioned by, built for, or delivered to the original Upwork client or organization**.
-
-All data used in this repository is synthetic.
-
----
-
-## License
-
-This project is licensed under the MIT License.
-
-See [`LICENSE`](LICENSE) for details.
+My broader portfolio explores healthcare analytics, SQL, Power BI, and data-driven operational improvement.
