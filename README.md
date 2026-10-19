@@ -8,7 +8,7 @@ A Google Sheets-based prototype for organising healthcare operations and turning
 
 ## Dashboard Preview
 
-![Healthcare Practice Operations Dashboard](images/Operations Tracking & Reporting System - Google Sheets.png)
+![Healthcare Practice Operations Dashboard](images/Operations%20Tracking%20%26%20Reporting%20System%20-%20Google%20Sheets.png)
 
 ## 1. Project Overview
 
